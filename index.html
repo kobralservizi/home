@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobral Servizi | Soluzioni Industriali & Coperture</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Libreria Animazioni su Scroll (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #0b0f17;
+            --bg-card: #161e2e;
+            --bg-card-hover: #1e293b;
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --text-title: #ffffff;
+            --text-body: #94a3b8;
+            --text-muted: #64748b;
+            --border-light: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER MINIMAL */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 15, 23, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.03);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-body);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-left: 30px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 8% 80px;
+            background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.08) 0%, rgba(11, 15, 23, 1) 70%);
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 800;
+            color: var(--text-title);
+            line-height: 1.15;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            color: var(--text-body);
+            font-weight: 400;
+        }
+
+        .btn-glow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #000;
+            padding: 16px 36px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 0 25px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+            background: #12d494;
+        }
+
+        /* HIGHLIGHT BAR */
+        .highlight-bar {
+            max-width: 1100px;
+            margin: -50px auto 100px;
+            padding: 0 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .highlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .highlight-text h4 {
+            color: var(--text-title);
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .highlight-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* SECTIONS GENERAL */
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-title);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 8px;
+        }
+
+        /* SERVICES GRID */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+        }
+
+        .service-img-wrapper {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.08);
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            color: var(--text-title);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-content p {
+            color: var(--text-body);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* OPERATIVITA & TIMELINE */
+        .logistics-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .logistics-info h3 {
+            font-size: 1.8rem;
+            color: var(--text-title);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .logistics-info p {
+            color: var(--text-body);
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-top: 6px;
+            box-shadow: 0 0 10px var(--accent);
+            flex-shrink: 0;
+        }
+
+        .timeline-text h5 {
+            color: var(--text-title);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .timeline-text p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .logistics-box-dark {
+            background: rgba(11, 15, 23, 0.6);
+            border: 1px solid var(--border-light);
+            padding: 35px;
+            border-radius: 16px;
+        }
+
+        .logistics-box-dark h4 {
+            color: var(--text-title);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .info-row i {
+            color: var(--accent);
+        }
+
+        /* FORM CONTATTI MINIMAL */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            background: rgba(11, 15, 23, 0.8);
+            border: 1px solid var(--border-light);
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .contact-form textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-submit:hover {
+            background: #12d494;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-light);
+            padding: 40px 8%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 900px) {
+            .logistics-wrapper {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER MINIMAL -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Kobral Logo">
+        </div>
+        <nav>
+            <a href="#servizi">Servizi</a>
+            <a href="#operativita">Operatività</a>
+            <a href="#contatti">Contatti</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <div class="hero-badge">
+                <i class="fa-solid fa-bolt"></i> Operatività In Tutta Italia
+            </div>
+            <h1>Edilizia Industriale, Coperture & <span>Bonifiche</span></h1>
+            <p>Specialisti in coibentazioni termiche, rifacimento tetti e rimozione amianto. Massima precisione, tempi certi e presenza sul cantiere.</p>
+            <a href="#contatti" class="btn-glow">
+                Richiedi Preventivo <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- HIGHLIGHT BAR / TRASFERTE NAZIONALI -->
+    <div class="highlight-bar">
+        <div class="highlight-grid">
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="highlight-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div class="highlight-text">
+                    <h4>Trasferte Nazionali</h4>
+                    <p>Sempre in cantiere il lunedì</p>
+                </div>
+            </div>
+
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="highlight-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="highlight-text">
+                    <h4>Bonifiche Certificate</h4>
+                    <p>Smaltimento amianto a norma di legge</p>
+                </div>
+            </div>
+
+            <div class="highlight-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="highlight-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div class="highlight-text">
+                    <h4>Reperibilità Commerciale</h4>
+                    <p>Lunedì - Venerdì</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVIZI -->
+    <section id="servizi">
+        <div class="section-header" data-aos="fade-up">
+            <h2>I Nostri Servizi</h2>
+            <p>Soluzioni avanzate per strutture civili ed industriali</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-img-wrapper">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80');"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Coibentazioni Termiche</h3>
+                    <p>Isolamento ad alte prestazioni per capannoni e strutture. Massimo risparmio energetico e protezione dalle intemperie.</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-img-wrapper">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=600&q=80');"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Rifacimento Tetti</h3>
+                    <p>Ripristino e posa di nuove coperture industriali e civili con materiali ad alta resistenza e finiture di pregio.</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-img-wrapper">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80');"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Smaltimento Amianto</h3>
+                    <p>Rimozione in sicurezza, bonifica ed incapsulamento certificato per la tutela dell'ambiente e della salute.</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-img-wrapper">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80');"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Bonifiche Ambientali</h3>
+                    <p>Interventi tecnici complessi e manutenzioni generali per la riqualificazione di siti ed aree industriali.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPERATIVITA -->
+    <section id="operativita">
+        <div class="logistics-wrapper" data-aos="zoom-in-up">
+            <div class="logistics-info">
+                <h3>Organizzazione Cantiere</h3>
+                <p>La nostra logistica è strutturata per garantire zero ritardi nelle consegne dei lavori.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">
+                            <h5>Partenza la Domenica</h5>
+                            <p>Organizzazione logistica e spostamento squadre dalla sede centrale.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">
+                            <h5>Sempre in cantiere il Lunedì</h5>
+                            <p>Inizio immediato delle lavorazioni senza perdite di tempo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logistics-box-dark">
+                <h4><i class="fa-solid fa-building"></i> Sede & Supporto</h4>
+                <div class="info-row">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Sede Logistica: Scafati (SA)</span>
+                </div>
+                <div class="info-row">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>Reperibilità commerciale: Lunedì - Venerdì</span>
+                </div>
+                <div class="info-row">
+                    <i class="fa-solid fa-earth-italy"></i>
+                    <span>Operatività: Tutto il territorio nazionale</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Richiedi Informazioni</h2>
+            <p>Compila il modulo per ricevere un preventivo su misura</p>
+        </div>
+
+        <div class="contact-container" data-aos="fade-up" data-aos-delay="100">
+            <!-- FormSubmit collegato a kobralservizi@outlook.it -->
+            <form class="contact-form" action="https://formsubmit.co/kobralservizi@outlook.it" method="POST">
+                <input type="hidden" name="_subject" value="Nuovo contatto dal sito web Kobral">
+                <input type="hidden" name="_captcha" value="false">
+
+                <input type="text" name="Azienda_Nome" placeholder="Nome / Azienda" required>
+                <input type="email" name="Email" placeholder="Email di contatto" required>
+                <input type="tel" name="Telefono" placeholder="Telefono">
+                <input type="text" name="Citta_Cantiere" placeholder="Città del Cantiere">
+                <div class="form-full">
+                    <textarea name="Messaggio" placeholder="Descrivi brevemente l'intervento..." required></textarea>
+                </div>
+                <div class="form-full">
+                    <button type="submit" class="btn-submit">Invia Richiesta <i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© Kobral Servizi S.r.l.s. - Sede Logistica: Scafati (SA) | Tutti i diritti riservati.</p>
+    </footer>
+
+    <!-- Script Animazioni AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+    </script>
+</body>
+</html>
