@@ -60,16 +60,21 @@
         }
 
         .logo-container img {
-            height: 48px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
-            transition: transform 0.3s ease;
-        }
+    height: 65px; /* Aumentata la dimensione per renderlo visibile */
+    width: auto;
+    object-fit: contain;
+    background-color: #ffffff; /* Fondo bianco per far risaltare il logo nero */
+    padding: 6px 14px; /* Spazio interno elegante */
+    border-radius: 8px; /* Angoli arrotondati minimal */
+    border: 1px solid rgba(16, 185, 129, 0.4); /* Bordino verde accent */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Ombra per staccare dallo sfondo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .logo-container img:hover {
-            transform: scale(1.03);
-        }
+.logo-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+}
 
         nav a {
             text-decoration: none;
