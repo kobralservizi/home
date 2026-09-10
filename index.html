@@ -15,7 +15,6 @@
 
     <style>
         :root {
-            /* Palette: Nero, Giallo Industriale e Bianco */
             --bg-dark: #0a0b0d;
             --bg-card: #13151b;
             --bg-card-alt: #1a1d26;
@@ -43,37 +42,35 @@
             background-color: var(--bg-dark);
             color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* HEADER */
+        /* HEADER & NAVIGATION */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 11, 13, 0.92);
+            background: rgba(10, 11, 13, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-line);
             z-index: 1000;
-            padding: 1.2rem 8%;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        /* Trasforma il logo nero su sfondo chiaro in logo bianco trasparente */
-.logo img {
-  filter: invert(1) brightness(2); /* Inverte il nero in bianco ed esalta la luminosità */
-  mix-blend-mode: screen;         /* Rende trasparente lo sfondo scuro/nero sul tuo sito */
-  max-width: 100%;
-  height: auto;
-}
-        
+        /* TRASFORMAZIONE LOGO IN BIANCO E TRASPARENTE VIA CSS */
         .logo-container img {
-            height: 45px;
-            background: #ffffff;
-            padding: 5px 12px;
-            border-radius: 4px;
-            border: 1px solid var(--yellow-accent);
+            height: 42px;
+            width: auto;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            /* Inverte le linee nere in bianco e rimuove il fondo chiaro */
+            filter: invert(1) brightness(2);
+            mix-blend-mode: screen;
+            display: block;
         }
 
         nav {
@@ -111,9 +108,19 @@
             color: #000 !important;
         }
 
+        /* MENU MOBILE (HAMBURGER) */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--yellow-accent);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
         /* HERO SECTION */
         .hero {
-            padding: 180px 8% 80px;
+            padding: 160px 5% 80px;
             min-height: 85vh;
             display: flex;
             align-items: center;
@@ -142,7 +149,7 @@
 
         .hero h1 {
             font-family: var(--font-title);
-            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-size: clamp(2rem, 5vw, 4.2rem);
             line-height: 1.1;
             margin-bottom: 25px;
             font-weight: 700;
@@ -154,7 +161,7 @@
         }
 
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 40px;
             max-width: 700px;
@@ -162,13 +169,11 @@
 
         .hero-btns {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
-        .btn-main {
-            background: var(--yellow-accent);
-            color: #000;
+        .btn-main, .btn-outline {
             padding: 16px 32px;
             font-weight: 700;
             text-transform: uppercase;
@@ -176,25 +181,22 @@
             text-decoration: none;
             border-radius: 4px;
             font-size: 0.9rem;
-            transition: transform 0.3s, background 0.3s;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .btn-main {
+            background: var(--yellow-accent);
+            color: #000;
         }
 
         .btn-main:hover {
-            transform: translateY(-2px);
             background: var(--yellow-light);
         }
 
         .btn-outline {
             border: 1px solid #ffffff;
             color: #ffffff;
-            padding: 16px 32px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
         }
 
         .btn-outline:hover {
@@ -203,7 +205,7 @@
             background: rgba(255, 208, 0, 0.05);
         }
 
-        /* BANNER A SCORRIMENTO (MARQUEE TICKER) */
+        /* MARQUEE TICKER */
         .marquee-banner {
             width: 100%;
             overflow: hidden;
@@ -213,7 +215,6 @@
             padding: 18px 0;
             position: relative;
             white-space: nowrap;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .marquee-track {
@@ -221,29 +222,20 @@
             animation: marquee 25s linear infinite;
         }
 
-        .marquee-banner:hover .marquee-track {
-            animation-play-state: paused;
-        }
-
         .marquee-item {
             display: flex;
             align-items: center;
             gap: 12px;
             font-family: var(--font-title);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--text-primary);
-            padding: 0 30px;
+            padding: 0 20px;
         }
 
-        .marquee-item i {
-            color: var(--yellow-accent);
-            font-size: 1rem;
-        }
-
-        .marquee-item .highlight {
+        .marquee-item i, .marquee-item .highlight {
             color: var(--yellow-accent);
         }
 
@@ -252,7 +244,7 @@
             height: 6px;
             background: var(--yellow-accent);
             border-radius: 50%;
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         @keyframes marquee {
@@ -263,13 +255,13 @@
         /* INFOBAR */
         .info-bar {
             background: var(--bg-dark);
-            padding: 50px 8%;
+            padding: 40px 5%;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -298,11 +290,11 @@
 
         /* SEZIONI GENERALI */
         section {
-            padding: 100px 8%;
+            padding: 80px 5%;
         }
 
         .section-title-box {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .subtitle {
@@ -317,24 +309,23 @@
 
         .title {
             font-family: var(--font-title);
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             color: #fff;
         }
 
         /* SERVIZI */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .service-card {
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px 30px;
+            padding: 35px 25px;
             border-radius: 6px;
-            position: relative;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: all 0.3s;
         }
 
         .service-card:hover {
@@ -357,7 +348,7 @@
 
         .service-card p {
             color: var(--text-secondary);
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             margin-bottom: 20px;
         }
 
@@ -378,32 +369,25 @@
 
         .service-list li i {
             color: var(--yellow-accent);
-            font-size: 0.8rem;
         }
 
-        /* SICUREZZA */
+        /* OPERATIVITA */
         .highlight-box {
             background: var(--bg-card-alt);
             border: 1px solid var(--border-line);
             border-radius: 8px;
-            padding: 50px;
+            padding: 40px 30px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
         }
 
         .highlight-text h3 {
             font-family: var(--font-title);
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             margin-bottom: 15px;
             color: #ffffff;
-        }
-
-        .highlight-text p {
-            color: #d1d5db;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
         }
 
         .badge-list {
@@ -417,7 +401,7 @@
             align-items: center;
             gap: 12px;
             background: rgba(0, 0, 0, 0.4);
-            padding: 14px 18px;
+            padding: 14px;
             border-radius: 4px;
             border-left: 3px solid var(--yellow-accent);
         }
@@ -427,7 +411,7 @@
             font-size: 1.2rem;
         }
 
-        /* INSTAGRAM FEED */
+        /* INSTAGRAM */
         .instagram-section {
             background: var(--bg-card);
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -438,7 +422,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 20px;
         }
@@ -448,25 +432,18 @@
             align-items: center;
             gap: 10px;
             background: var(--yellow-accent);
-            color: #000000;
+            color: #000;
             padding: 12px 24px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .btn-instagram:hover {
-            transform: translateY(-2px);
-            background: var(--yellow-light);
         }
 
         .instagram-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -477,18 +454,17 @@
             overflow: hidden;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.3s, border-color 0.3s;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s;
         }
 
         .insta-card:hover {
             transform: translateY(-5px);
-            border-color: var(--yellow-accent);
         }
 
         .insta-img-placeholder {
-            height: 200px;
+            height: 180px;
             background: #181b22;
             display: flex;
             flex-direction: column;
@@ -499,7 +475,7 @@
         }
 
         .insta-img-placeholder i {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 8px;
         }
 
@@ -512,39 +488,38 @@
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 0.75rem;
-            font-weight: 600;
         }
 
         .insta-body {
-            padding: 20px;
+            padding: 15px;
         }
 
         .insta-body h4 {
             font-family: var(--font-title);
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #ffffff;
             margin-bottom: 6px;
         }
 
         .insta-body p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
-        /* FORM CONTATTI */
+        /* FORM */
         .form-container {
             max-width: 800px;
             margin: 0 auto;
             background: var(--bg-card);
             border: 1px solid var(--border-line);
-            padding: 40px;
+            padding: 30px;
             border-radius: 8px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 15px;
         }
 
         .full-width {
@@ -553,28 +528,23 @@
 
         .form-group label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-secondary);
             margin-bottom: 6px;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             background: var(--bg-dark);
             border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 12px;
             color: #fff;
-            font-family: inherit;
             border-radius: 4px;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--yellow-accent);
         }
@@ -588,29 +558,68 @@
             font-weight: 700;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .btn-submit:hover {
-            background: var(--yellow-light);
         }
 
         footer {
             border-top: 1px solid var(--border-line);
-            padding: 30px 8%;
+            padding: 25px 5%;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
+        /* REGOLAZIONI MOBILE RESPONSIVE */
         @media (max-width: 850px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0a0b0d;
+                flex-direction: column;
+                padding: 25px 20px;
+                border-bottom: 1px solid var(--border-line);
+                gap: 20px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                font-size: 1rem;
+            }
+
+            .btn-header {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero {
+                padding-top: 130px;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+            }
+
+            .btn-main, .btn-outline {
+                width: 100%;
+            }
+
             .highlight-box {
                 grid-template-columns: 1fr;
-                padding: 30px;
             }
+
             .form-grid {
                 grid-template-columns: 1fr;
             }
@@ -622,9 +631,14 @@
     <!-- HEADER -->
     <header>
         <div class="logo-container">
-            <img src="logo.png" alt="Kobral Servizi Logo">
+            <img src="logo.jpg" alt="Kobral Servizi Logo">
         </div>
-        <nav>
+        
+        <button class="mobile-toggle" id="menuToggle" aria-label="Apri menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav id="navMenu">
             <a href="#servizi">Servizi</a>
             <a href="#operativita">Operatività</a>
             <a href="#cantieri">Social</a>
@@ -647,18 +661,16 @@
         </div>
     </section>
 
-    <!-- BANNER A SCORRIMENTO CONTINUO (TICKER MARQUEE) -->
+    <!-- BANNER TICKER -->
     <div class="marquee-banner">
         <div class="marquee-track">
-            <!-- SET 1 -->
             <div class="marquee-item"><i class="fa-solid fa-earth-italy"></i> Disponibilità in tutta Italia <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Team Giovane e Dinamico <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-certificate"></i> Patentini PLE Certificati <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-shield-halved"></i> Interventi in Quota Senza Limiti <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-industry"></i> <span class="highlight">Zero Fermatura Impianti</span> <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-truck-moving"></i> Partenza Domenicale Garantita <span class="dot"></span></div>
-
-            <!-- SET 2 DUPLICATO PER LOOP INFINITO PERFETTO -->
+            <!-- Duplicato per loop -->
             <div class="marquee-item"><i class="fa-solid fa-earth-italy"></i> Disponibilità in tutta Italia <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Team Giovane e Dinamico <span class="dot"></span></div>
             <div class="marquee-item"><i class="fa-solid fa-certificate"></i> Patentini PLE Certificati <span class="dot"></span></div>
@@ -863,5 +875,29 @@
         <p>© Kobral Servizi - Coperture & Bonifiche Ambientali | Operativi in tutta Italia</p>
     </footer>
 
+    <!-- SCRIPT JS PER MENU MOBILE -->
+    <script>
+        const menuToggle = id => document.getElementById(id);
+        const toggleBtn = menuToggle('menuToggle');
+        const navMenu = menuToggle('navMenu');
+
+        toggleBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = toggleBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fa-solid fa-xmark';
+            } else {
+                icon.className = 'fa-solid fa-bars';
+            }
+        });
+
+        // Chiude il menu dopo il click su un link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                toggleBtn.querySelector('i').className = 'fa-solid fa-bars';
+            });
+        });
+    </script>
 </body>
 </html>
