@@ -60,6 +60,14 @@
             align-items: center;
         }
 
+        /* Trasforma il logo nero su sfondo chiaro in logo bianco trasparente */
+.logo img {
+  filter: invert(1) brightness(2); /* Inverte il nero in bianco ed esalta la luminosità */
+  mix-blend-mode: screen;         /* Rende trasparente lo sfondo scuro/nero sul tuo sito */
+  max-width: 100%;
+  height: auto;
+}
+        
         .logo-container img {
             height: 45px;
             background: #ffffff;
